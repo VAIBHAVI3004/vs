@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Will You Be My Valentine? 💗</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffdee9, #ffc3d1);
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 580px;
+      max-width: 90vw;
+        min-height: 420px;
+
+    }
+
+    h1 {
+      color: #ff4d6d;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #yes {
+  background: linear-gradient(135deg, #ff4d6d, #ff758f);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 6px 14px rgba(255, 77, 109, 0.35);
+}
+
+
+    #no {
+  background: linear-gradient(135deg, #ffd6e0, #ffc2d1);
+  color: #ff4d6d;
+  font-weight: bold;
+  border: 2px solid #ff9bb3;
+  box-shadow: 0 4px 10px rgba(255, 105, 135, 0.25);
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 9999;
+}
+
+  #no:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(255, 105, 135, 0.35);
+}
+
+    .envelope {
+  position: relative;
+  width: 100%;
+  min-height: 580px;
+  height: auto;
+  margin: 30px auto 0;
+  background: #ffb3c6;
+  border-radius: 12px;
+  display: none;
+  overflow: hidden;
+}
+
+.letter p {
+  margin: 6px 0;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff8fab;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  transform-origin: top;
+  transition: transform 1s ease;
+  z-index: 2;
+}
+
+.letter {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 1px 30px 1px 30px;
+  box-sizing: border-box;
+  transition: bottom 1s ease;
+  text-align: center;
+  font-size: 18px;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  bottom: 0;
+}
+
+/* Floating hearts & sparkles */
+.float {
+  position: fixed;
+  top: 100vh;
+  font-size: 36px;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+}
+
+#valentinePic {
+  width: 80%;
+  max-width: 350px;
+  margin-top: 15px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#no {
+  background-color: #ffd6e0;
+  color: #ff4d6d;
+  z-index: 9999;      /* ⭐ keeps it on top */
+}
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+  <h1 id="question">Will you be my Valentine, Again😁? 💌</h1>
+
+  <button id="yes" onclick="openEnvelope()">YES 💗</button>
+  <button id="no" onmouseover="runAway()">NO 😶</button>
+  <img src="vday pic.png" id="valentinePic">
+
+
+  <!-- Envelope -->
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <h2>My Rooh-e 💗🤲🏻</h2>
+      <p>
+        From the moment I got to know you, till today, your presence beside me has made my life absolutely dream like. Your every loud and silent "I love you" brings so much peace and happiness to my heart, I really cant thank Allah enough for you and for this beautiful love you shower on me💗💫🤲🏻.
+        Truly I am the luckiest person ever to have YOU as my life partner💍.
+        May Allah answer all our Duas and keep us together fid-Dunya-wal-Akhira.
+        I know the stage of life you are in is so difficult,but my cutu, I know YOU CAN, I see the pottential in you!!!
+        just give your best in everything ,I will be by your side through every up and every down.
+        I believe in you. Give best and leave the rest on Allah!
+        ANDDDD Stay the same loving, gentle, kind soul forever!!!!!!!
+        May your smile grow wider and fuller, may Allah bless you with everything that your heart desires.
+        Aameen🤲🏻
+        <p>Happy YOU😍 = Happy ME 🥰</p>
+      </p>
+      <p>
+        You truly are the BESTEST thing that has ever happened to me, My World🌍💫</p>
+        <p>With Love (more than this world can hold)</p>
+            
+      <p><b>- Yours Aya Afnan 💫💗</b></p>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  let chaseCount = 0;
+
+
+
+function runAway() {
+  const noBtn = document.getElementById("no");
+  const box = document.querySelector(".box");
+
+  chaseCount++;
+
+  // ⭐ Stop after 5 chases
+  if (chaseCount >= 3) {
+    noBtn.innerText = "Gotchaa😏!You're stuck with me forever!!🥰";
+    noBtn.onmouseover = null;
+    return;
+  }
+
+  const boxRect = box.getBoundingClientRect();
+
+  const btnW = noBtn.offsetWidth;
+  const btnH = noBtn.offsetHeight;
+
+  noBtn.style.position = "fixed";
+  noBtn.style.zIndex = "9999";
+
+  let x, y;
+  let attempts = 0;
+
+  do {
+    // keep fully inside viewport
+    x = Math.random() * (window.innerWidth - btnW);
+    y = Math.random() * (window.innerHeight - btnH);
+
+    attempts++;
+    if (attempts > 50) break; // safety exit
+  } while (
+    x + btnW > boxRect.left &&
+    x < boxRect.right &&
+    y + btnH > boxRect.top &&
+    y < boxRect.bottom
+  );
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+
+  function openEnvelope() {
+    document.getElementById("question").style.display = "none";
+    document.getElementById("yes").style.display = "none";
+    document.getElementById("no").style.display = "none";
+    document.getElementById("valentinePic").style.display = "none";
+
+    const envelope = document.getElementById("envelope");
+    envelope.style.display = "block";
+
+    setTimeout(() => {
+      envelope.classList.add("open");
+      startFloating();
+    }, 300);
+  }
+
+  let showHeart = 0;
+
+function startFloating() {
+  setInterval(() => {
+    const item = document.createElement("div");
+    item.className = "float";
+
+    // Pattern: 💗 💫 💗
+    if (showHeart) {
+      item.innerText = "💫";
+    } else {
+      item.innerText = "💗";
+    }
+
+    showHeart = !showHeart;
+
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.animationDuration = (4 + Math.random() * 3) + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => {
+      item.remove();
+    }, 6000);
+  }, 200);
+}
+
+</script>
+
+
+</body>
+</html>
