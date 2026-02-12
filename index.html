@@ -247,11 +247,54 @@
 //   noBtn.style.top = y + "px";
 // }
 
-let chaseCount = 0;
-let caught = false;   // ⭐ prevents extra triggers
+// let chaseCount = 0;
+// let caught = false;   // ⭐ prevents extra triggers
+
+// function runAway() {
+//   if (caught) return;   // stop extra clicks after final
+
+//   const noBtn = document.getElementById("no");
+//   const box = document.querySelector(".box");
+
+//   chaseCount++;
+
+//   if (chaseCount >= 5) {
+//     caught = true;   // lock state immediately
+//     noBtn.innerText = "Gotchaa 😏! You're stuck with me forever!! 🥰";
+//     noBtn.onclick = null;   // disable further movement
+//     return;
+//   }
+
+//   const boxRect = box.getBoundingClientRect();
+//   const btnW = noBtn.offsetWidth;
+//   const btnH = noBtn.offsetHeight;
+
+//   noBtn.style.position = "fixed";
+//   noBtn.style.zIndex = "9999";
+
+//   let x, y;
+//   let attempts = 0;
+
+//   do {
+//     x = Math.random() * (window.innerWidth - btnW);
+//     y = Math.random() * (window.innerHeight - btnH);
+//     attempts++;
+//     if (attempts > 50) break;
+//   } while (
+//     x + btnW > boxRect.left &&
+//     x < boxRect.right &&
+//     y + btnH > boxRect.top &&
+//     y < boxRect.bottom
+//   );
+
+//   noBtn.style.left = x + "px";
+//   noBtn.style.top = y + "px";
+// }
 
 function runAway() {
-  if (caught) return;   // stop extra clicks after final
+  if (caught || isMoving) return;   // ⭐ prevents mobile double taps
+
+  isMoving = true;
 
   const noBtn = document.getElementById("no");
   const box = document.querySelector(".box");
@@ -259,9 +302,10 @@ function runAway() {
   chaseCount++;
 
   if (chaseCount >= 5) {
-    caught = true;   // lock state immediately
+    caught = true;
     noBtn.innerText = "Gotchaa 😏! You're stuck with me forever!! 🥰";
-    noBtn.onclick = null;   // disable further movement
+    noBtn.onclick = null;
+    isMoving = false;
     return;
   }
 
@@ -289,8 +333,12 @@ function runAway() {
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-}
 
+  // ⭐ allow next tap after tiny delay
+  setTimeout(() => {
+    isMoving = false;
+  }, 200);
+}
   
 
 
